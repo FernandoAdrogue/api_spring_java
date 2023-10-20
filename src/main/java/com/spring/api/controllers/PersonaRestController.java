@@ -1,6 +1,7 @@
 package com.spring.api.controllers;
 
 import com.spring.api.domain.Persona;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,7 +47,12 @@ public class PersonaRestController {
         return null;
     }
 
-    public void deletePersona(Long id) {
-
+    @DeleteMapping("/personas/{id}")
+    public void deletePersona(@PathVariable Long id) {
+        for (Persona persona : this.personas){
+            if (persona.getId().equals(id)) {
+                this.personas.remove(persona);
+            }
+        }
     }
 }
